@@ -14,12 +14,15 @@ func _generate_map(width, height):
 	for x in width:
 		for y in height:
 			if(y % 2):
-				create_chunk(Vector2(x + 0.3, y - 0.17))
+				if(x % 2):
+					create_chunk(Vector2(x + 0.20, y))
+				else:
+					create_chunk(Vector2(x + 0.3, y - 0.17))
 				continue
-			#if(x % 2):	
-				#create_chunk(Vector2(x, y - 0.25))
-			#else:
-			create_chunk(Vector2(x, y))
+			if(x % 2):	
+				create_chunk(Vector2(x - 0.10, y + 0.17))
+			else:
+				create_chunk(Vector2(x, y))
 	pass
 
 func create_chunk(vector):
