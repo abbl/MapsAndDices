@@ -7,10 +7,10 @@ path="res://.import/test_hexagon.png-7e579c40d565edf3c88b80b4a8c9305d.stex"
 [deps]
 
 source_file="res://Textures/test_hexagon.png"
-source_md5="f699bf60137523c6ef0c0fe1e1c96433"
+source_md5="6e8eae20e818ad2c3945b715f0603da3"
 
 dest_files=[ "res://.import/test_hexagon.png-7e579c40d565edf3c88b80b4a8c9305d.stex" ]
-dest_md5="2c40d0fdffb837873b0024e2d94f139b"
+dest_md5="5fab8b842e2f82de42b2a3a0f25e0c27"
 
 [params]
 

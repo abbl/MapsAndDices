@@ -16,10 +16,10 @@ func _ready():
 #	pass
 
 func add_hexagon_on_screen():
-	add_child(prepare_hexagon_entity(Vector2(300, 300)))
+	add_child(prepare_hexagon_entity(Vector2(300, 300)), true)
 	pass
 
 func prepare_hexagon_entity(vector):
-	exampleHexagon = load("res://Scripts/Hexagon.gd").new()
+	exampleHexagon = load("res://Scripts/Hexagons/HexagonMapGenerator.gd").new()
 	return exampleHexagon
 
