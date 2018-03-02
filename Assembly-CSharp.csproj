@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{530F634E-E44B-82FF-F4FE-D437F68436B2}</ProjectGuid>
+    <ProjectGuid>{760FDCF9-24AB-E5DE-8E40-3D3BB1DF895D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -46,8 +46,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
-     <Compile Include="Assets\Scripts\CameraMove.cs" />
      <Compile Include="Assets\Scripts\GameCordinator.cs" />
+     <Compile Include="Assets\Scripts\Hexagon.cs" />
      <Compile Include="Assets\Scripts\HexagonMapGenerator.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
  <Reference Include="UnityEngine.UI">

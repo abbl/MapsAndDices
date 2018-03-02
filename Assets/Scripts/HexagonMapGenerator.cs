@@ -3,14 +3,14 @@ using System.Collections;
 
 public class HexagonMapGenerator : MonoBehaviour {
     public GameObject sampleHexagon;
-    public int rows;
-    public int columns;
     private ArrayList hexagons;
 
 	// Use this for initialization
 	void Start () {
         hexagons = new ArrayList();
-        GenerateWorld(rows, columns);
+        PlayerPrefs.SetInt("mapRows", 32);
+        PlayerPrefs.SetInt("mapColumns", 32);
+        GenerateWorld(PlayerPrefs.GetInt("mapRows"), PlayerPrefs.GetInt("mapColumns"));
 	}
 	
 	// Update is called once per frame
@@ -34,6 +34,9 @@ public class HexagonMapGenerator : MonoBehaviour {
         GameObject gameObject = Instantiate(sampleHexagon);
         gameObject.transform.parent = GameObject.Find("HexagonMap").transform;
         SetFixedPosition(gameObject, x, y);
+        Hexagon hexagon = gameObject.GetComponent<Hexagon>();
+        hexagon.fixedPosition = new Vector2(x, y);
+        hexagons.Add(gameObject);
         return null;
     }
 
