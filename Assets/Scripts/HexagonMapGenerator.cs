@@ -36,13 +36,14 @@ public class HexagonMapGenerator : MonoBehaviour {
         SetFixedPosition(gameObject, x, y);
         Hexagon hexagon = gameObject.GetComponent<Hexagon>();
         hexagon.fixedPosition = new Vector2(x, y);
-        hexagons.Add(gameObject);
+        hexagons.Add(hexagon);
         return null;
     }
 
     private void SetFixedPosition(GameObject hexagon, int column, int row)
     {
         Vector2 positionVector = hexagon.transform.position;
+
         float offset = 0;
         if(column % 2 == 0)
         {
@@ -61,5 +62,14 @@ public class HexagonMapGenerator : MonoBehaviour {
     private float getHexagonHeight()
     {
         return sampleHexagon.GetComponent<Renderer>().bounds.size.y;
+    }
+
+    public Hexagon GetHexagon(Vector2 fixedPosition)
+    {
+        foreach(Hexagon hexagon in hexagons){
+            if (hexagon.isPositionEqual(fixedPosition))
+                return hexagon;
+        }
+        return null;
     }
 }

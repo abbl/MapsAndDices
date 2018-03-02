@@ -36,6 +36,13 @@ public class Hexagon : MonoBehaviour {
         GetSpriteRenderer().color = defaultColor;
     }
 
+    public bool isPositionEqual(Vector2 fixedPosition)
+    {
+        if (this.fixedPosition.x == fixedPosition.x && this.fixedPosition.y == fixedPosition.y)
+            return true;
+        return false;
+    }
+
     private SpriteRenderer GetSpriteRenderer()
     {
         return gameObject.GetComponent<SpriteRenderer>();
