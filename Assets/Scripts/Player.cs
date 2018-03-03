@@ -3,11 +3,15 @@ using System.Collections;
 
 public class Player{
     public Color playerColor { get; set; }
+    public string playerName { get; set; }
     private ArrayList playerHexagons;
+    private static int index = 1;
 
 	public Player()
     {
         playerHexagons = new ArrayList();
+        playerName = "Player" + index;
+        index++;
     }
 
     public void AddHexagon(GameObject hexagon)
@@ -33,5 +37,18 @@ public class Player{
     public bool doesPlayerOwnThisHexagon(GameObject hexagon)
     {
         return playerHexagons.Contains(hexagon);
+    }
+
+    public bool doesPlayerOwnThisHexagon(Vector2 fixedPosition)
+    {
+        foreach(GameObject gameObject in playerHexagons)
+        {
+            Hexagon hexagon = gameObject.GetComponent<Hexagon>();
+            if (hexagon.isPositionEqual(fixedPosition))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

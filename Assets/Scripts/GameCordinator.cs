@@ -98,14 +98,48 @@ public class GameCordinator : MonoBehaviour {
 
     public void receivePlayerHexagonClick(Hexagon hexagon)
     {
-        if (!playerTurn.doesPlayerOwnThisHexagon(hexagon.gameObject))
+        if (CheckIfPlayerCanConquerCertainHex(hexagon))
         {
-            playerTurn.AddHexagon(hexagon.gameObject);
+            if (!playerTurn.doesPlayerOwnThisHexagon(hexagon.gameObject))
+            {
+                playerTurn.AddHexagon(hexagon.gameObject);
+            }
+            NextTurn();
         }
         else
         {
-            playerTurn.RemoveHexagon(hexagon.gameObject);
+            Debug.Log("Player can't conquer this hex: " + hexagon.fixedPosition.x + " " + hexagon.fixedPosition.y);
         }
-        NextTurn();
+    }
+
+    private bool CheckIfPlayerCanConquerCertainHex(Hexagon hexagon)
+    {
+        Vector2[] availableMoves = { new Vector2(0, 1), new Vector2(1, 0), new Vector2(1, -1), new Vector2(0, -1), new Vector2(-1, -1), new Vector2(-1, 0) };
+
+        foreach (Vector2 availableMove in availableMoves)
+        {
+            if(playerTurn.doesPlayerOwnThisHexagon(new Vector2(hexagon.fixedPosition.x + availableMove.x, hexagon.fixedPosition.y + availableMove.y)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void OnGUI()
+    {
+        GUI.contentColor = Color.white;
+        GUI.Box(new Rect(10, 10, 200, 200), "Players turn:");
+        int index = 1;
+        foreach (Player player in players)
+        {
+            GUI.contentColor = player.playerColor;
+            GUI.Label(new Rect(10, 10 + (index * 10), 100, 20), "Player " + index);
+            index++;
+        }
+        GUI.contentColor = Color.white;
+        GUI.Label(new Rect(10, 130, 100, 20), "Turn now:");
+        GUI.contentColor = playerTurn.playerColor;
+        GUI.Label(new Rect(10, 150, 100, 20), playerTurn.playerName);
     }
 }

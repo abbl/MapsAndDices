@@ -42,7 +42,7 @@ public class Hexagon : MonoBehaviour {
             return true;
         return false;
     }
-
+    
     private SpriteRenderer GetSpriteRenderer()
     {
         return gameObject.GetComponent<SpriteRenderer>();
