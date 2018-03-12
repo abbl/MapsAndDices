@@ -2,47 +2,38 @@
 using System.Collections;
 
 public class HexagonMapGenerator : MonoBehaviour {
-    public GameObject sampleHexagon;
     private ArrayList hexagons;
+    public int width;
+    public int height;
+    public GameObject sampleHexagon;
 
-	// Use this for initialization
 	void Start () {
         hexagons = new ArrayList();
-        PlayerPrefs.SetInt("mapRows", 32);
-        PlayerPrefs.SetInt("mapColumns", 32);
-        GenerateWorld(PlayerPrefs.GetInt("mapRows"), PlayerPrefs.GetInt("mapColumns"));
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    private void GenerateWorld(int rows, int colums)
+    public void GenerateWorld()
     {
-        for(int row = 1; row < rows; row++)
+        for(int row = 1; row < height + 1; row++) //y
         {
-            for(int column = 1; column < colums; column++)
+            for(int column = 1; column < width + 1; column++) //x
             {
-                createHexagon(column, row);
+                CreateHexagon(column, row);
             }
         }
     }
 
-    private GameObject createHexagon(int x, int y)
+    private void CreateHexagon(int x, int y)
     {
-        GameObject gameObject = Instantiate(sampleHexagon);
-        gameObject.transform.parent = GameObject.Find("HexagonMap").transform;
-        SetFixedPosition(gameObject, x, y);
-        Hexagon hexagon = gameObject.GetComponent<Hexagon>();
+        GameObject hexagonObject = Instantiate(sampleHexagon, GetFixedPosition(x, y), Quaternion.identity) as GameObject;
+        hexagonObject.transform.parent = gameObject.transform;
+        Hexagon hexagon = hexagonObject.GetComponent<Hexagon>();
         hexagon.fixedPosition = new Vector2(x, y);
         hexagons.Add(hexagon);
-        return null;
     }
 
-    private void SetFixedPosition(GameObject hexagon, int column, int row)
+    private Vector2 GetFixedPosition(int column, int row)
     {
-        Vector2 positionVector = hexagon.transform.position;
+        Vector2 positionVector = Vector2.zero;
 
         float offset = 0;
         if(column % 2 == 0)
@@ -51,7 +42,8 @@ public class HexagonMapGenerator : MonoBehaviour {
         }
         positionVector.x = column * (getHexagonWidth() / 1.25f);
         positionVector.y = (row * getHexagonHeight() * 1.05f) + offset;
-        hexagon.transform.position = positionVector;
+
+        return positionVector;
     }
 
     private float getHexagonWidth()

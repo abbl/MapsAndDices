@@ -2,28 +2,23 @@
 using System.Collections;
 
 public class Hexagon : MonoBehaviour {
-    public Vector2 fixedPosition { get; set; }
-    private Color defaultColor;
+    private static GameCordinator gameCordinator;
+    private Material defaultMaterial;
+    public Vector2 fixedPosition;
 
-	// Use this for initialization
 	void Start () {
-        GetDefaultMaterial();
+        gameCordinator = GameObject.Find("GameCordinator").GetComponent<GameCordinator>();
+        StoreDefaultMaterial();
 	}
-	   
-    private void GetDefaultMaterial()
-    {
-        defaultColor = GetSpriteRenderer().color;
-    }
-
-	// Update is called once per frame
-	void Update () {
 	
-	}
+    private void StoreDefaultMaterial()
+    {
+        defaultMaterial = GetComponent<Renderer>().material;
+    }
 
     void OnMouseDown()
     {
-        GameCordinator gameCordinator = GameObject.Find("GameCordinator").GetComponent<GameCordinator>();
-        gameCordinator.receivePlayerHexagonClick(this);
+
     }
 
     public void SetColor(Color color)
@@ -33,7 +28,7 @@ public class Hexagon : MonoBehaviour {
 
     public void RestoreDefaultColor()
     {
-        GetSpriteRenderer().color = defaultColor;
+        GetComponent<Renderer>().material = defaultMaterial;
     }
 
     public bool isPositionEqual(Vector2 fixedPosition)
@@ -46,5 +41,10 @@ public class Hexagon : MonoBehaviour {
     private SpriteRenderer GetSpriteRenderer()
     {
         return gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    public void SetFixedPosition(Vector2 fixedPosition)
+    {
+        this.fixedPosition = fixedPosition;
     }
 }

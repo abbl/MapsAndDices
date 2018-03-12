@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Resources\Tools\Timer.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Dice.cs" />
      <Compile Include="Assets\Scripts\GameCordinator.cs" />
      <Compile Include="Assets\Scripts\Hexagon.cs" />
      <Compile Include="Assets\Scripts\HexagonMapGenerator.cs" />

@@ -2,53 +2,34 @@
 using System.Collections;
 
 public class Player{
-    public Color playerColor { get; set; }
-    public string playerName { get; set; }
-    private ArrayList playerHexagons;
-    private static int index = 1;
+    private Hexagon currentHex;
+    private Color playerColor;
 
-	public Player()
+    public Player()
     {
-        playerHexagons = new ArrayList();
-        playerName = "Player" + index;
-        index++;
+        RandomPlayerColor();
     }
 
-    public void AddHexagon(GameObject hexagon)
+    private void RandomPlayerColor()
     {
-        if (hexagon.CompareTag("Hexagon"))
-        {
-            Hexagon hexagonComponent = hexagon.GetComponent<Hexagon>();
-            hexagonComponent.SetColor(playerColor);
-            playerHexagons.Add(hexagon);
-        }
+        playerColor = new Color(Random.Range(0.0f, 1.0f), 0.5f, 0.5f, 1.0f);
     }
 
-    public void RemoveHexagon(GameObject hexagon)
+    public void MovePlayer(Hexagon newHex)
     {
-        if (hexagon.CompareTag("Hexagon"))
-        {
-            Hexagon hexagonComponent = hexagon.GetComponent<Hexagon>();
-            hexagonComponent.RestoreDefaultColor();
-            playerHexagons.Remove(hexagon);
-        }
+        if (currentHex != null)
+            ReturnPreviousHexToDefaultColor();
+        currentHex = newHex;
+        ChangeHexColorToPlayerColor();
     }
 
-    public bool doesPlayerOwnThisHexagon(GameObject hexagon)
+    private void ChangeHexColorToPlayerColor()
     {
-        return playerHexagons.Contains(hexagon);
+        currentHex.SetColor(playerColor);
     }
 
-    public bool doesPlayerOwnThisHexagon(Vector2 fixedPosition)
+    private void ReturnPreviousHexToDefaultColor()
     {
-        foreach(GameObject gameObject in playerHexagons)
-        {
-            Hexagon hexagon = gameObject.GetComponent<Hexagon>();
-            if (hexagon.isPositionEqual(fixedPosition))
-            {
-                return true;
-            }
-        }
-        return false;
+        currentHex.RestoreDefaultColor();
     }
 }
