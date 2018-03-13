@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class Hexagon : MonoBehaviour {
-    private static GameCordinator gameCordinator;
+    private static PlayerActionController playerActionController;
     private Material defaultMaterial;
     public Vector2 fixedPosition;
 
 	void Start () {
-        gameCordinator = GameObject.Find("GameCordinator").GetComponent<GameCordinator>();
+        playerActionController = GameObject.Find("Controllers").GetComponent<PlayerActionController>();
         StoreDefaultMaterial();
 	}
 	
@@ -18,7 +18,7 @@ public class Hexagon : MonoBehaviour {
 
     void OnMouseDown()
     {
-
+        playerActionController.ReceivePlayerMove(this);
     }
 
     public void SetColor(Color color)
@@ -46,5 +46,10 @@ public class Hexagon : MonoBehaviour {
     public void SetFixedPosition(Vector2 fixedPosition)
     {
         this.fixedPosition = fixedPosition;
+    }
+
+    public Vector2 GetFixedPosition()
+    {
+        return fixedPosition;
     }
 }

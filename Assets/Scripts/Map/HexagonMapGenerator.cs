@@ -3,9 +3,9 @@ using System.Collections;
 
 public class HexagonMapGenerator : MonoBehaviour {
     private ArrayList hexagons;
+    public GameObject sampleHexagon;
     public int width;
     public int height;
-    public GameObject sampleHexagon;
 
 	void Start () {
         hexagons = new ArrayList();

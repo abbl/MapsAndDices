@@ -12,7 +12,7 @@ public class Player{
 
     private void RandomPlayerColor()
     {
-        playerColor = new Color(Random.Range(0.0f, 1.0f), 0.5f, 0.5f, 1.0f);
+        playerColor = new Color(Random.Range(0.0f, 1.0f), 0.5f, 0.5f);
     }
 
     public void MovePlayer(Hexagon newHex)
@@ -31,5 +31,10 @@ public class Player{
     private void ReturnPreviousHexToDefaultColor()
     {
         currentHex.RestoreDefaultColor();
+    }
+
+    public Vector2 GetCurrentPosition()
+    {
+        return currentHex.fixedPosition;
     }
 }

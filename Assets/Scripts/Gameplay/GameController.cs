@@ -1,16 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameCordinator : MonoBehaviour {
+public class GameController : MonoBehaviour {
     private HexagonMapGenerator map;
     private ArrayList players;
+    private Player turn;
     public int playersAmount;
+
+    /*
+     * Things done only once when game scene is loaded.
+     */
 
     void Start()
     {
         InitializeFields();
         GenerateMap();
         SpawnPlayers();
+        turn = (Player) players[0];
     }
 
     private void InitializeFields()
@@ -36,6 +42,20 @@ public class GameCordinator : MonoBehaviour {
 
     private Hexagon RandomPlayerPosition()
     {
-        return map.GetHexagon(new Vector2(Random.Range(1, map.width), Random.Range(1, map.height)));
+        return map.GetHexagon(new Vector2(5, 6)); //new Vector2(Random.Range(1, map.width), Random.Range(1, map.height))
+    }
+
+    /*
+    * Things that are used during gameplay
+    */
+
+    void Update()
+    {
+
+    }
+
+    public Player GetPlayerTurn()
+    {
+        return turn;
     }
 }
