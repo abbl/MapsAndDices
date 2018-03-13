@@ -3,17 +3,17 @@ using System.Collections;
 
 public class Hexagon : MonoBehaviour {
     private static PlayerActionController playerActionController;
-    private Material defaultMaterial;
+    private Color defaultColor;
     public Vector2 fixedPosition;
 
 	void Start () {
         playerActionController = GameObject.Find("Controllers").GetComponent<PlayerActionController>();
         StoreDefaultMaterial();
-	}
+    }
 	
     private void StoreDefaultMaterial()
     {
-        defaultMaterial = GetComponent<Renderer>().material;
+        defaultColor = new Color(1f, 1f, 1f, 1f);
     }
 
     void OnMouseDown()
@@ -28,7 +28,7 @@ public class Hexagon : MonoBehaviour {
 
     public void RestoreDefaultColor()
     {
-        GetComponent<Renderer>().material = defaultMaterial;
+        GetSpriteRenderer().color = defaultColor;
     }
 
     public bool isPositionEqual(Vector2 fixedPosition)
