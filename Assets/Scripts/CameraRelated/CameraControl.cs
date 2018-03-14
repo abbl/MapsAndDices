@@ -3,13 +3,17 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour {
     private GameObject mainCamera;
+    private Camera camera;
     public float cameraSpeed;
     public float cameraScrollSpeed;
+    public float maxCameraDistance;
+    public float minCameraDistance;
 
 	// Use this for initialization
 	void Start () {
         mainCamera = GameObject.Find("Camera");
-	}
+        camera = mainCamera.GetComponentInChildren<Camera>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -27,15 +31,19 @@ public class CameraControl : MonoBehaviour {
 
     private void ChangeCameraSize()
     {
-        Camera camera = mainCamera.GetComponentInChildren<Camera>();
-
         if(Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            camera.orthographicSize += 1 * cameraScrollSpeed;
+            if((camera.orthographicSize - (1 * cameraScrollSpeed)) >= minCameraDistance)
+            {
+                camera.orthographicSize -= 1 * cameraScrollSpeed;
+            }
         }
         else if(Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            camera.orthographicSize -= 1 * cameraScrollSpeed;
+            if ((camera.orthographicSize + (1 * cameraScrollSpeed)) <= maxCameraDistance)
+            {
+                camera.orthographicSize += 1 * cameraScrollSpeed;
+            }
         }
     }
 }

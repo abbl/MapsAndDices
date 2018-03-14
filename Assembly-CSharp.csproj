@@ -45,14 +45,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Resources\Tools\Timer.cs" />
      <Compile Include="Assets\Scripts\CameraRelated\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Dice.cs" />
      <Compile Include="Assets\Scripts\Gameplay\GameController.cs" />
      <Compile Include="Assets\Scripts\Gameplay\PlayerActionController.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\TurnController.cs" />
      <Compile Include="Assets\Scripts\Map\Hexagon.cs" />
      <Compile Include="Assets\Scripts\Map\HexagonMapGenerator.cs" />
      <Compile Include="Assets\Scripts\PlayerRelated\Player.cs" />
+     <Compile Include="Assets\Scripts\Tools\Timer.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>G:/Newest Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

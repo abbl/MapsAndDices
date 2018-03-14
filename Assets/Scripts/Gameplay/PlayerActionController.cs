@@ -25,28 +25,33 @@ public class PlayerActionController : MonoBehaviour {
     {
         Vector2 hexagonPosition = hexagon.GetFixedPosition();
         Vector2 playerPosition = gameController.GetPlayerTurn().GetCurrentPosition();
-        
+        float distanceDifferenceX = playerPosition.x - hexagonPosition.x;
+        float distanceDifferenceY = playerPosition.y - hexagonPosition.y;
+
         //Simple checking if given hexagon is close to player.
-        if(playerPosition.x - hexagonPosition.x <= 1 && playerPosition.x - hexagonPosition.x >= -1 &&//x
-            playerPosition.y - hexagonPosition.y <= 1 && playerPosition.y - hexagonPosition.y >= -1)
+        if (distanceDifferenceX <= 1 && distanceDifferenceX >= -1 &&//x
+            distanceDifferenceY <= 1 && distanceDifferenceY >= -1)
         {
-            if(playerPosition.x % 2 == 0) //When x is even player is able to do 2 additional moves that he shouldn't be able to do in a game.
+            if(distanceDifferenceX != 0 || distanceDifferenceY != 0)
             {
-                if(playerPosition.x - hexagonPosition.x != 1 || playerPosition.y - hexagonPosition.y != 1) //removing #1 case when player shouldn't be able to move
+                if (playerPosition.x % 2 == 0) //When x is even player is able to do 2 additional moves that he shouldn't be able to do in a game.
                 {
-                    if(playerPosition.x - hexagonPosition.x != -1 || playerPosition.y - hexagonPosition.y != 1) //removing #2 case when player shouldn't be able to move
+                    if (distanceDifferenceX != 1 || distanceDifferenceY != 1) //removing #1 case when player shouldn't be able to move
                     {
-                        gameController.GetPlayerTurn().MovePlayer(hexagon);
+                        if (distanceDifferenceX != -1 || distanceDifferenceY != 1) //removing #2 case when player shouldn't be able to move
+                        {
+                            gameController.GetPlayerTurn().MovePlayer(hexagon);
+                        }
                     }
                 }
-            }
-            else //The same thing happens when x is odd so as you can guess I removed those two cases too.
-            {
-                if (playerPosition.x - hexagonPosition.x != -1 || playerPosition.y - hexagonPosition.y != -1) //removing #1 case when player shouldn't be able to move
+                else //The same thing happens when x is odd so as you can guess I removed those two cases too.
                 {
-                    if (playerPosition.x - hexagonPosition.x != 1 || playerPosition.y - hexagonPosition.y != -1) //removing #2 case when player shouldn't be able to move
+                    if (distanceDifferenceX != -1 || distanceDifferenceY != -1) //removing #1 case when player shouldn't be able to move
                     {
-                        gameController.GetPlayerTurn().MovePlayer(hexagon);
+                        if (distanceDifferenceX != 1 || distanceDifferenceY != -1) //removing #2 case when player shouldn't be able to move
+                        {
+                            gameController.GetPlayerTurn().MovePlayer(hexagon);
+                        }
                     }
                 }
             }
