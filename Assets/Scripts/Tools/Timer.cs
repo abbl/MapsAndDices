@@ -5,6 +5,7 @@ public class Timer : MonoBehaviour {
     private float elapsedTime;
     private float endTime;
     private bool isWorking;
+    private bool isPaused;
     private bool done;
 
 	// Use this for initialization
@@ -21,11 +22,14 @@ public class Timer : MonoBehaviour {
     {
         if (isWorking)
         {
-            elapsedTime += Time.deltaTime;
-            if(elapsedTime >= endTime)
+            if (!isPaused)
             {
-                done = true;
-                isWorking = false;
+                elapsedTime += Time.deltaTime;
+                if (elapsedTime >= endTime)
+                {
+                    done = true;
+                    isWorking = false;
+                }
             }
         }
     }
@@ -37,9 +41,20 @@ public class Timer : MonoBehaviour {
         isWorking = true;
     }
 
+    public void PauseTimer()
+    {
+        isPaused = true;
+    }
+
+    public void ResumeTimer()
+    {
+        isPaused = false;
+    }
+
     private void RestartTimer()
     {
         isWorking = false;
+        isPaused = false;
         done = false;
         elapsedTime = 0f;
         endTime = 0f;
