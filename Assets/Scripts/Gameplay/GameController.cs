@@ -3,8 +3,8 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
     private HexagonMapGenerator map;
+    private TurnController turnController;
     private ArrayList players;
-    private Player turn;
     public int playersAmount;
 
     /*
@@ -16,12 +16,12 @@ public class GameController : MonoBehaviour {
         InitializeFields();
         GenerateMap();
         SpawnPlayers();
-        turn = (Player) players[0];
     }
 
     private void InitializeFields()
     {
         map = GameObject.Find("HexagonMap").GetComponent<HexagonMapGenerator>();
+        turnController = GetComponent<TurnController>();
         players = new ArrayList();
     }
 
@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour {
 
     private Hexagon RandomPlayerPosition()
     {
-        return map.GetHexagon(new Vector2(5, 6)); //new Vector2(Random.Range(1, map.width), Random.Range(1, map.height))
+        return map.GetHexagon(new Vector2(Random.Range(1, map.width), Random.Range(1, map.height)));
     }
 
     /*
@@ -56,6 +56,11 @@ public class GameController : MonoBehaviour {
 
     public Player GetPlayerTurn()
     {
-        return turn;
+        return turnController.GetPlayerTurn();
+    }
+
+    public ArrayList GetPlayers()
+    {
+        return players;
     }
 }

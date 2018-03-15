@@ -60,7 +60,7 @@ public class Timer : MonoBehaviour {
         endTime = 0f;
     }
 
-    public bool isCountingDone()
+    public bool IsCountingDone()
     {
         return done;
     }

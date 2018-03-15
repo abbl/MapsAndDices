@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class PlayerActionController : MonoBehaviour {
-    private readonly Vector2[] availableMovesWhenXisEven = new[] { new Vector2(0, 1)};
-    private readonly Vector2[] availableMovesWhenXisntEven = new[] { new Vector2(0, 1) };
     private GameController gameController;
 	
     // Use this for initialization
