@@ -55,6 +55,7 @@ public class TurnController : MonoBehaviour {
             turnNow = (Player)players[playerIndex += 1];
         }
         timer.StartTimer(turnTime);
+        GetComponent<PlayerActionController>().NextTurn();
         Debug.Log("Now {" + playerIndex + "} turn");
     }
 
@@ -73,5 +74,14 @@ public class TurnController : MonoBehaviour {
     public Player GetPlayerTurn()
     {
         return turnNow;
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(1760, 740, 256, 256), "Time Left: " + timer.GetTimeLeft());
+        if(GUI.Button(new Rect(1760, 760, 128, 128), "Next Turn"))
+        {
+            NextTurn();
+        }
     }
 }

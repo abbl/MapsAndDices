@@ -65,8 +65,8 @@ public class Timer : MonoBehaviour {
         return done;
     }
 
-    public float GetTimeLeft()
+    public int GetTimeLeft()
     {
-        return endTime - elapsedTime;
+        return (int)(endTime - elapsedTime) + 1;
     }
 }
