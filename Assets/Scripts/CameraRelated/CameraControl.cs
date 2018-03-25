@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class CameraControl : MonoBehaviour {
-    private GameObject mainCamera;
     private Camera camera;
     public float cameraSpeed;
     public float cameraScrollSpeed;
@@ -11,8 +10,7 @@ public class CameraControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        mainCamera = GameObject.Find("Camera");
-        camera = mainCamera.GetComponentInChildren<Camera>();
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 	
 	// Update is called once per frame
@@ -26,7 +24,7 @@ public class CameraControl : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(horizontal * cameraSpeed, vertical * cameraSpeed, 0);
-        mainCamera.transform.position = new Vector3(mainCamera.transform.position.x + movement.x, mainCamera.transform.position.y + movement.y, 0);
+        camera.transform.position = new Vector3(camera.transform.position.x + movement.x, camera.transform.position.y + movement.y, 0);
     }
 
     private void ChangeCameraSize()

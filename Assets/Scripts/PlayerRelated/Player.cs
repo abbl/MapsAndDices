@@ -37,4 +37,14 @@ public class Player{
     {
         return currentHex.fixedPosition;
     }
+
+    public Color GetPlayerColor()
+    {
+        return playerColor;
+    }
+
+    public Transform GetPlayerTransform()
+    {
+        return currentHex.transform;
+    }
 }

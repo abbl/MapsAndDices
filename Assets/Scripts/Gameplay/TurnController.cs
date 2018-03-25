@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TurnController : MonoBehaviour {
     private ArrayList players;
     private Player turnNow;
     private Timer timer;
+    private Text timerUI;
+    private Text playerUI;
     public int turnTime;
     
 	// Use this for initialization
 	void Start () {
         InitializeTimer();
         players = GetComponent<GameController>().GetPlayers();
+        timerUI = GameObject.Find("TurnTimePanel").GetComponentInChildren<Text>();
+        playerUI = GameObject.Find("PlayerTurnPanel").GetComponentInChildren<Text>();
     }
 	
     private void InitializeTimer()
@@ -23,6 +28,7 @@ public class TurnController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         ManageTurns();
+        UpdateTimerUI();
 	}
 
     private void ManageTurns()
@@ -38,7 +44,9 @@ public class TurnController : MonoBehaviour {
     private void StartFirstTurn()
     {
         turnNow = (Player)players[0];
+        MoveCameraToPlayer();
         timer.StartTimer(turnTime);
+        UpdatePlayerTurnUI();
     }
 
     private void NextTurn()
@@ -56,7 +64,25 @@ public class TurnController : MonoBehaviour {
         }
         timer.StartTimer(turnTime);
         GetComponent<PlayerActionController>().NextTurn();
-        Debug.Log("Now {" + playerIndex + "} turn");
+        GetComponent<DayCycleController>().NextTurn();
+        MoveCameraToPlayer();
+        UpdatePlayerTurnUI();
+    }
+
+    private void MoveCameraToPlayer()
+    {
+        Camera.main.transform.position = new Vector3(turnNow.GetPlayerTransform().position.x, turnNow.GetPlayerTransform().position.y);
+    }
+
+    private void UpdateTimerUI()
+    {
+        timerUI.text = timer.GetTimeLeft().ToString();
+    }
+
+    private void UpdatePlayerTurnUI()
+    {
+        playerUI.text = "Player";
+        playerUI.color = turnNow.GetPlayerColor();
     }
 
     private int GetPlayerIndex(Player player)
@@ -76,12 +102,8 @@ public class TurnController : MonoBehaviour {
         return turnNow;
     }
 
-    void OnGUI()
+    public void TaskOnClick()
     {
-        GUI.Label(new Rect(1760, 740, 256, 256), "Time Left: " + timer.GetTimeLeft());
-        if(GUI.Button(new Rect(1760, 760, 128, 128), "Next Turn"))
-        {
-            NextTurn();
-        }
+        NextTurn();
     }
 }
