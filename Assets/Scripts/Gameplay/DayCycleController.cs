@@ -28,7 +28,7 @@ public class DayCycleController : MonoBehaviour {
     {
         if(++cycleCount > cycleLenght)
         {
-            cycleCount = 0;
+            cycleCount = 1;
             NextCycle();
         }
     }

@@ -20,7 +20,7 @@ public class TurnController : MonoBehaviour {
 	
     private void InitializeTimer()
     {
-        GameObject timerObject = new GameObject();
+        GameObject timerObject = new GameObject("Timer");
         timerObject.AddComponent<Timer>();
         timer = timerObject.GetComponent<Timer>();
     }
