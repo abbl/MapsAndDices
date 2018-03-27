@@ -63,7 +63,7 @@ public class TurnController : MonoBehaviour {
             turnNow = (Player)players[playerIndex += 1];
         }
         timer.StartTimer(turnTime);
-        GetComponent<PlayerActionController>().NextTurn();
+        GetComponent<PlayerActionController>().MakePlayerAbleToMove();
         GetComponent<DayCycleController>().NextTurn();
         MoveCameraToPlayer();
         UpdatePlayerTurnUI();

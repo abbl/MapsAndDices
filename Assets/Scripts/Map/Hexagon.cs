@@ -92,9 +92,9 @@ public class Hexagon : MonoBehaviour {
     private void CreateHexagonCard()
     {
         hexagonCard = Instantiate(Resources.Load("Cards/DefaultHexCard"), GameObject.Find("Canvas").transform, false) as GameObject;
-        Image hexImage = (Image)hexagonCard.transform.FindChild("HexImage").gameObject.GetComponent<Image>();
-        Text hexName = (Text) hexagonCard.transform.FindChild("HexName").gameObject.GetComponent<Text>();
-        Text hexDesc = (Text)hexagonCard.transform.FindChild("HexDesc").gameObject.GetComponent<Text>();
+        Image hexImage = (Image)hexagonCard.transform.Find("HexImage").gameObject.GetComponent<Image>();
+        Text hexName = (Text) hexagonCard.transform.Find("HexName").gameObject.GetComponent<Text>();
+        Text hexDesc = (Text)hexagonCard.transform.Find("HexDesc").gameObject.GetComponent<Text>();
         hexImage.sprite = hexagonImage;
         hexName.text = hexagonName;
         hexDesc.text = hexagonDesc;

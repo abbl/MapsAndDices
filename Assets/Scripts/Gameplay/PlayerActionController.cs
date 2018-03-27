@@ -58,7 +58,7 @@ public class PlayerActionController : MonoBehaviour {
         }
     }
 
-    public void NextTurn()
+    public void MakePlayerAbleToMove()
     {
         isPlayerAbleToMove = true;
     }
