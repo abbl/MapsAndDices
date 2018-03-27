@@ -32,11 +32,14 @@ public class GameController : MonoBehaviour {
 
     private void SpawnPlayers()
     {
+        GameObject playersGameObject = GameObject.Find("Players");
         for(int i = 0; i < playersAmount; i++)
         {
-            Player player = new Player();
-            player.MovePlayer(RandomPlayerPosition());
-            players.Add(player);
+            GameObject player = Instantiate(Resources.Load("PlayerPrefab/DefaultPlayer"), playersGameObject.transform, false) as GameObject;
+            player.name = "Player " + i;
+            Player playerComp = player.GetComponent<Player>();
+            playerComp.MovePlayer(RandomPlayerPosition());
+            players.Add(playerComp);
         }
     }
 

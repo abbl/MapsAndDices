@@ -66,12 +66,38 @@ public class TurnController : MonoBehaviour {
         GetComponent<PlayerActionController>().MakePlayerAbleToMove();
         GetComponent<DayCycleController>().NextTurn();
         MoveCameraToPlayer();
+        ManagePlayerLanterns();
         UpdatePlayerTurnUI();
     }
 
     private void MoveCameraToPlayer()
     {
-        Camera.main.transform.position = new Vector3(turnNow.GetPlayerTransform().position.x, turnNow.GetPlayerTransform().position.y);
+        Camera.main.transform.position = new Vector3(turnNow.GetPlayerTransform().position.x, turnNow.GetPlayerTransform().position.y, Camera.main.transform.position.z);
+    }
+
+    private void ManagePlayerLanterns()
+    {
+        string cycleNow = GetComponent<DayCycleController>().GetActiveCycleName();
+        switch (cycleNow)
+        {
+            case "Evening":
+                SwitchPlayerLanterns(true);
+                break;
+            case "Morning":
+                SwitchPlayerLanterns(false);
+                break;
+        }
+    }
+
+    private void SwitchPlayerLanterns(bool status)
+    {
+        foreach(Player player in players)
+        {
+            if (status)
+                player.TurnOnPlayerLantern();
+            else
+                player.TurnOffPlayerLantern();
+        }
     }
 
     private void UpdateTimerUI()

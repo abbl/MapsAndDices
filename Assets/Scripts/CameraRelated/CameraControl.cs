@@ -24,7 +24,7 @@ public class CameraControl : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(horizontal * cameraSpeed, vertical * cameraSpeed, 0);
-        camera.transform.position = new Vector3(camera.transform.position.x + movement.x, camera.transform.position.y + movement.y, 0);
+        camera.transform.position = new Vector3(camera.transform.position.x + movement.x, camera.transform.position.y + movement.y, camera.transform.position.z + movement.z);
     }
 
     private void ChangeCameraSize()

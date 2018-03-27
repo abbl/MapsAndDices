@@ -48,4 +48,9 @@ public class DayCycleController : MonoBehaviour {
     {
         GameObject.Find("DayCyclePanel").GetComponentInChildren<Text>().text = dayCycleArray[dayCycleIndex].name;
     }
+
+    public string GetActiveCycleName()
+    {
+        return dayCycleArray[dayCycleIndex].name;
+    }
 }
