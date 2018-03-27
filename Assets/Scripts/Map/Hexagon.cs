@@ -8,6 +8,7 @@ public class Hexagon : MonoBehaviour {
     public Vector2 fixedPosition;
 
     private GameObject hexagonCard;
+    public Sprite[] hexagonSpriteVariations;
     public Sprite hexagonImage;
     public string hexagonName;
     public string hexagonDesc;
@@ -15,8 +16,18 @@ public class Hexagon : MonoBehaviour {
 	void Start () {
         playerActionController = GameObject.Find("Controllers").GetComponent<PlayerActionController>();
         StoreDefaultMaterial();
+        RandomHexagonSprite();
     }
 	
+    private void RandomHexagonSprite()
+    {
+        if(hexagonSpriteVariations.Length != 0)
+        {
+            int varietyIndex = Random.Range(0, hexagonSpriteVariations.Length);
+            GetSpriteRenderer().sprite = hexagonSpriteVariations[varietyIndex];
+        }
+    }
+
     private void StoreDefaultMaterial()
     {
         defaultColor = new Color(1f, 1f, 1f, 1f);

@@ -102,7 +102,7 @@ public class TurnController : MonoBehaviour {
         return turnNow;
     }
 
-    public void TaskOnClick()
+    public void EndPlayerTurn()
     {
         NextTurn();
     }
