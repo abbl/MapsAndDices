@@ -19,11 +19,23 @@ public class Player : NetworkBehaviour {
         SpawnPlayer();
     }
 
+    [Server]
     private void SpawnPlayer()
     {
-        if (!isServer)
-            return;
         GameObject playerChecker = Instantiate(playerCheckerPrefab);
         NetworkServer.SpawnWithClientAuthority(playerChecker, connectionToClient);
+    }
+
+    public void SkipTurn()
+    {
+        if (isLocalPlayer)
+            Cmd_SkipTurn(netId);
+    }
+
+    [Command]
+    private void Cmd_SkipTurn(NetworkInstanceId netId)
+    {
+        Debug.Log("NetId:" + netId);
+        GameObject.Find("TurnController").GetComponent<TurnController>().SkipTurn(netId);
     }
 }

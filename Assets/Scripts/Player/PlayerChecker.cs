@@ -7,16 +7,12 @@ public class PlayerChecker : NetworkBehaviour {
     [SyncVar]
     public Color playerColor;
 
-	// Use this for initialization
-	void Start () {
-        if (!isClient)
-        {
-            Debug.Log("This player does not have authority to change colors");
-            return;
-        }   
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
         Cmd_RandomPlayerColor();
-	}
-    
+    }
+
     [Command]
     private void Cmd_RandomPlayerColor()
     {
@@ -27,13 +23,14 @@ public class PlayerChecker : NetworkBehaviour {
     private void RandomPlayerColorOnServer()
     {
         playerColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
+        Debug.Log("Color has been set");
     }
 
     void Update()
     {
         if (isClient)
         {
-            if(GetSpriteRenderer().color != playerColor)
+            if (GetSpriteRenderer().color != playerColor)
             {
                 GetSpriteRenderer().color = playerColor;
             }

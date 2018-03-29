@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DiceController : NetworkBehaviour {
     private GameObject rollResultWindow;
     public GameObject rollResultPrefab;
+
     [SyncVar]
     public int minRoll;
     [SyncVar]
@@ -42,7 +43,7 @@ public class DiceController : NetworkBehaviour {
     public void Rpc_DisplayRollResult(int rollResult)
     {
         rollResultWindow.GetComponentInChildren<Text>().text = "Roll result: " + rollResult;
-        RestoreRollWindowDefaultOpacity();
+        ChangeRollWindowComponentsOpacity(1f);
         rollResultWindow.SetActive(true);
     }
 
@@ -58,7 +59,7 @@ public class DiceController : NetworkBehaviour {
     {
         if (rollResultWindow.GetComponent<Image>().color.a > 0)
         {
-            FadeOutAllComponentsInRollWindow();
+            ChangeRollWindowComponentsOpacity(-(Time.deltaTime / fadeOutDivisor));
         }
         else
         {
@@ -66,15 +67,9 @@ public class DiceController : NetworkBehaviour {
         }
     }
 
-    private void FadeOutAllComponentsInRollWindow()
+    private void ChangeRollWindowComponentsOpacity(float value)
     {
-        rollResultWindow.GetComponent<Image>().color = rollResultWindow.GetComponent<Image>().color - new Color(0f, 0f, 0f, Time.deltaTime / fadeOutDivisor);
-        rollResultWindow.GetComponentInChildren<Text>().color = rollResultWindow.GetComponentInChildren<Text>().color - new Color(0f, 0f, 0f, Time.deltaTime / fadeOutDivisor);
-    }
-
-    private void RestoreRollWindowDefaultOpacity()
-    {
-        rollResultWindow.GetComponent<Image>().color = rollResultWindow.GetComponent<Image>().color + new Color(0f, 0f, 0f, 1f);
-        rollResultWindow.GetComponentInChildren<Text>().color = rollResultWindow.GetComponentInChildren<Text>().color + new Color(0f, 0f, 0f, 1f);
+        rollResultWindow.GetComponent<Image>().color = rollResultWindow.GetComponent<Image>().color + new Color(0f, 0f, 0f, value);
+        rollResultWindow.GetComponentInChildren<Text>().color = rollResultWindow.GetComponentInChildren<Text>().color + new Color(0f, 0f, 0f, value);
     }
 }
