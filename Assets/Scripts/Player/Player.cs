@@ -4,55 +4,26 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class Player : NetworkBehaviour {
-    [SyncVar]
-    public string playerName;
-    [SyncVar]
-    public Color playerColor;
-    [SyncVar]
-    public Vector2 playerPosition;
+    public GameObject playerCheckerPrefab;
 
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
-        Cmd_RandomPlayerColor();
-        UpdatePlayerColor();
-        Cmd_SpawnOnRandomCords(0, 15);
-        UpdatePlayerPosition();
+        if (!isLocalPlayer)
+            return;
+        Cmd_SpawnPlayerChecker();
 	}
 
     [Command]
-    private void Cmd_RandomPlayerColor()
+    private void Cmd_SpawnPlayerChecker()
     {
-        playerColor = new Color(RandomSomeNumber(), RandomSomeNumber(), RandomSomeNumber(), 1f);  
+        SpawnPlayer();
     }
 
-    private float RandomSomeNumber()
+    private void SpawnPlayer()
     {
-        return Random.Range(0f, 1f);
+        if (!isServer)
+            return;
+        GameObject playerChecker = Instantiate(playerCheckerPrefab);
+        NetworkServer.SpawnWithClientAuthority(playerChecker, connectionToClient);
     }
-    
-    private void UpdatePlayerColor()
-    {
-        GetSpriteRenderer().color = playerColor;
-    }
-
-    [Command]
-    private void Cmd_SpawnOnRandomCords(int min, int max)
-    {
-        playerPosition = new Vector2(Random.Range(min, max), Random.Range(min, max));
-    }
-
-    private void UpdatePlayerPosition()
-    {
-        gameObject.transform.position = playerPosition;
-    }
-
-    private SpriteRenderer GetSpriteRenderer()
-    {
-        return GetComponent<SpriteRenderer>();
-    }
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
