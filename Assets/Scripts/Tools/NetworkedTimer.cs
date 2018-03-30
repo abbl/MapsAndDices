@@ -3,22 +3,21 @@ using UnityEngine.Networking;
 using System.Collections;
 
 public class NetworkedTimer : NetworkBehaviour {
-    private float elapsedTime;
-    private float endTime;
-    private bool isWorking;
-    private bool isPaused;
-    private bool done;
+    private int lastValue;
+    public float elapsedTime;
+    public float endTime;
+    public bool isWorking;
+    public bool isPaused;
+    public bool done;
 
-	// Use this for initialization
-	void Start () {
-        RestartTimer();
-	}
-	
-	// Update is called once per frame
 	void Update () {
+        if (!isServer)
+            return;
+
         HandleTimer();
 	}
 
+    [Server]
     private void HandleTimer()
     {
         if (isWorking)
@@ -35,6 +34,7 @@ public class NetworkedTimer : NetworkBehaviour {
         }
     }
 
+    [Server]
     public void StartTimer(float endTime)
     {
         RestartTimer();
@@ -42,16 +42,19 @@ public class NetworkedTimer : NetworkBehaviour {
         isWorking = true;
     }
 
+    [Server]
     public void PauseTimer()
     {
         isPaused = true;
     }
 
+    [Server]
     public void ResumeTimer()
     {
         isPaused = false;
     }
 
+    [Server]
     private void RestartTimer()
     {
         isWorking = false;
@@ -61,13 +64,15 @@ public class NetworkedTimer : NetworkBehaviour {
         endTime = 0f;
     }
 
+    [Server]
     public bool IsCountingDone()
     {
         return done;
     }
 
+    [Server]
     public int GetTimeLeft()
     {
-        return (int)(endTime - elapsedTime) + 1;
+        return (int)(endTime - elapsedTime);
     }
 }

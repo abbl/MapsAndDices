@@ -1,28 +1,44 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class TurnController : NetworkBehaviour {
-    private SyncList<TurnChangeListener> turnChangeListeners;
+    private ArrayList turnChangeListeners;
+    private NetworkedTimer turnTimer;
+    private int timerLastValue;
+    public int turnTime;
     [SyncVar]
-    public int playerTurnIndex;
+    public int playerTurnIndex = -1;
 
+    
     void Start()
     {
+        turnChangeListeners = new ArrayList();
 
+        if (isServer)
+        {
+            turnTimer = GameObject.Find("TurnNetworkedTimer").GetComponent<NetworkedTimer>();
+            EndTurn();
+        }
     }
 
     void Update()
     {
-        if(isServer)
+        if (isServer)
+        {
             isTurnDone();
+        }
     }
 
     [Server]
     private void isTurnDone()
     {
-
+        if(turnTimer != null)
+            if (turnTimer.IsCountingDone())
+            {
+                EndTurn();
+            }
     }
 
     [Server]
@@ -30,12 +46,25 @@ public class TurnController : NetworkBehaviour {
     {
         if(LocalDataManager.isNetIdEqual(LocalDataManager.GetPlayersGameObjects()[playerTurnIndex], playerNetId))
         {
-            Debug.Log("Valid player requested to end his turn.");
+            EndTurn();
         }
         else
         {
             Debug.Log("Not valid player requested to end his turn");
         }
+    }
+
+    [Server]
+    private void EndTurn()
+    {
+        int playersInGame = LocalDataManager.GetAllPlayers().Length - 1; //Changing starting index to 0;
+
+        if (++playerTurnIndex > playersInGame)
+        {
+            playerTurnIndex = 0;
+        }
+        turnTimer.StartTimer(turnTime);
+        NotifyListenersAboutNextTurn();
     }
 
     private void NotifyListenersAboutNextTurn()
