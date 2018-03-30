@@ -7,6 +7,7 @@ public class TurnController : NetworkBehaviour {
     private ArrayList turnChangeListeners;
     private NetworkedTimer turnTimer;
     private int timerLastValue;
+
     public int turnTime;
     [SyncVar]
     public int playerTurnIndex = -1;
@@ -15,10 +16,10 @@ public class TurnController : NetworkBehaviour {
     void Start()
     {
         turnChangeListeners = new ArrayList();
+        turnTimer = GameObject.Find("TurnNetworkedTimer").GetComponent<NetworkedTimer>();
 
         if (isServer)
-        {
-            turnTimer = GameObject.Find("TurnNetworkedTimer").GetComponent<NetworkedTimer>();
+        {            
             EndTurn();
         }
     }
@@ -78,5 +79,15 @@ public class TurnController : NetworkBehaviour {
     public void AddChangeListener(TurnChangeListener listener)
     {
         turnChangeListeners.Add(listener);
+    }
+
+    public int GetTurnTimerCount()
+    {
+        return turnTimer.GetTimeLeft();
+    }
+
+    public int GetPlayerIndex()
+    {
+        return playerTurnIndex;
     }
 }

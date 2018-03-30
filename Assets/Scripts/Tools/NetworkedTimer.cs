@@ -3,8 +3,9 @@ using UnityEngine.Networking;
 using System.Collections;
 
 public class NetworkedTimer : NetworkBehaviour {
-    private int lastValue;
+    [SyncVar]
     public float elapsedTime;
+    [SyncVar]
     public float endTime;
     public bool isWorking;
     public bool isPaused;
@@ -70,7 +71,6 @@ public class NetworkedTimer : NetworkBehaviour {
         return done;
     }
 
-    [Server]
     public int GetTimeLeft()
     {
         return (int)(endTime - elapsedTime);

@@ -54,9 +54,12 @@
      <Compile Include="Assets\Scripts\GameLogic\AbstractClasses\TurnChangeListener.cs" />
      <Compile Include="Assets\Scripts\GameLogic\DiceController.cs" />
      <Compile Include="Assets\Scripts\GameLogic\TurnController.cs" />
+     <Compile Include="Assets\Scripts\GameLogic\TurnView.cs" />
+     <Compile Include="Assets\Scripts\Map\HexagonController.cs" />
+     <Compile Include="Assets\Scripts\Map\HexagonModel.cs" />
+     <Compile Include="Assets\Scripts\Map\MapGenerator.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerChecker.cs" />
-     <Compile Include="Assets\Scripts\Player\UserInputController.cs" />
      <Compile Include="Assets\Scripts\Tools\LocalDataManager.cs" />
      <Compile Include="Assets\Scripts\Tools\NetworkedTimer.cs" />
  <Reference Include="UnityEngine.UI">
