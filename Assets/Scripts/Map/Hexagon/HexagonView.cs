@@ -12,14 +12,14 @@ public class HexagonView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        isHexagonLeftClicked();
-        isHexagonRightClicked();
+        IsHexagonLeftClicked();
+        IsHexagonRightClicked();
     }
 
     /// <summary>
     /// In case of left clicking player will move to certain hex
     /// </summary>
-    private void isHexagonLeftClicked()
+    private void IsHexagonLeftClicked()
     {
 
     }
@@ -27,7 +27,7 @@ public class HexagonView : MonoBehaviour {
     /// <summary>
     /// In case of right clicking a hexagon description card will appear.
     /// </summary>
-    private void isHexagonRightClicked()
+    private void IsHexagonRightClicked()
     {
         hexagonController.DisplayHexagonCard();
     }
