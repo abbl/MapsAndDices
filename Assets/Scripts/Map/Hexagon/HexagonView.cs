@@ -12,8 +12,14 @@ public class HexagonView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        IsHexagonLeftClicked();
-        IsHexagonRightClicked();
+        if (Input.anyKeyDown)
+        {
+            if (IsHit())
+            {
+                IsHexagonLeftClicked();
+                IsHexagonRightClicked();
+            }
+        }
     }
 
     /// <summary>
@@ -21,7 +27,7 @@ public class HexagonView : MonoBehaviour {
     /// </summary>
     private void IsHexagonLeftClicked()
     {
-
+        // TO DO 
     }
 
     /// <summary>
@@ -29,6 +35,27 @@ public class HexagonView : MonoBehaviour {
     /// </summary>
     private void IsHexagonRightClicked()
     {
-        hexagonController.DisplayHexagonCard();
+        if (Input.GetButtonDown("MouseRightButton"))
+        {
+            if (!hexagonController.IsHexagonDisplayed())
+            {
+                hexagonController.DisplayHexagonCard();
+                return;
+            }
+            hexagonController.HideHexagonCard();
+        }
+    }
+
+    /// <summary>
+    /// Checks if hexagon was clicked by player.
+    /// </summary>
+    private bool IsHit()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        if (hit.collider != null && hit.transform == gameObject.transform)
+        {
+            return true;
+        }
+        return false;
     }
 }

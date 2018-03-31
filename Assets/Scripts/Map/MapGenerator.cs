@@ -1,16 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MapGenerator : MonoBehaviour {
-
-	// Use this for initialization
+public class MapGenerator : NetworkBehaviour {
+    private Vector2 hexagonSize;
+    private ArrayList hexagonsArray;
+    public GameObject[] hexagons;
+    public float hexagonOffset;
+    public int rowsNumber;
+    public int columnsNumber;
+    
 	void Start () {
-		
+        if (isServer)
+        {
+            InitializeFields();
+            Generate();
+        }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    [Server]
+    private void InitializeFields()
+    {
+        hexagonsArray = new ArrayList();
+        hexagonSize = hexagons[0].GetComponent<Hexagon>().GetHexagonSize();
+        Debug.Log("HexagonSize:" + hexagonSize);
+    }
+
+    [Server]
+    public void Generate()
+    {
+        for (int row = 1; row < rowsNumber + 1; row++) //y
+        {
+            for (int column = 1; column < columnsNumber + 1; column++) //x
+            {
+                int hexagonIndex = Random.Range(0, hexagons.Length);
+                hexagonsArray.Add(CreateHexagon(row, column, hexagonIndex));
+            }
+        }
+    }
+
+    [Server]
+    private Hexagon CreateHexagon(int row, int column, int hexagonIndex)
+    {
+        GameObject hexagonObject = Instantiate(hexagons[hexagonIndex], CalculateHexagonPosition(row, column), Quaternion.identity) as GameObject;
+        hexagonObject.transform.parent = gameObject.transform;
+        NetworkServer.Spawn(hexagonObject);
+        Hexagon hexagon = hexagonObject.GetComponent<Hexagon>();
+        hexagon.SetFixedPosition(new Vector2(column, row));
+        return hexagon;
+    }
+
+    [Server]
+    private Vector2 CalculateHexagonPosition(int row, int column)
+    {
+        Vector2 positionVector = Vector2.zero;
+
+        float offset = 0;
+        if (column % 2 == 0)
+        {
+            offset = (hexagonSize.y / 2);
+        }
+        positionVector.x = (column * (hexagonSize.x * 0.75f));
+        positionVector.y = ((row * hexagonSize.y) + offset);
+        return positionVector;
+    }
 }

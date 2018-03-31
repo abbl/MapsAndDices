@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class HexagonController : MonoBehaviour {
+    private static GameObject hexagonCard;
     private Hexagon hexagon;
-    private GameObject hexagonCard;
-
+    
     private void Start()
     {
         hexagon = GetComponent<Hexagon>();
@@ -18,7 +18,7 @@ public class HexagonController : MonoBehaviour {
 
     private void CreateHexagonCard()
     {
-        hexagonCard = Resources.Load("Cards/DefaultHexCard") as GameObject;
+        hexagonCard = Instantiate(Resources.Load("Cards/DefaultHexCard"), GameObject.Find("Canvas").transform) as GameObject;
         Image hexImage = (Image)hexagonCard.transform.Find("HexImage").gameObject.GetComponent<Image>();
         Text hexName = (Text)hexagonCard.transform.Find("HexName").gameObject.GetComponent<Text>();
         Text hexDesc = (Text)hexagonCard.transform.Find("HexDesc").gameObject.GetComponent<Text>();
@@ -31,5 +31,10 @@ public class HexagonController : MonoBehaviour {
     {
         if (hexagonCard != null)
             Destroy(hexagonCard);
+    }
+
+    public bool IsHexagonDisplayed()
+    {
+        return hexagonCard != null;
     }
 }

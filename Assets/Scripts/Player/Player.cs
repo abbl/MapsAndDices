@@ -35,7 +35,6 @@ public class Player : NetworkBehaviour {
     [Command]
     private void Cmd_SkipTurn(NetworkInstanceId netId)
     {
-        Debug.Log("NetId:" + netId);
         GameObject.Find("TurnController").GetComponent<TurnController>().SkipTurn(netId);
     }
 }

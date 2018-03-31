@@ -23,7 +23,6 @@ public class PlayerChecker : NetworkBehaviour {
     private void RandomPlayerColorOnServer()
     {
         playerColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
-        Debug.Log("Color has been set");
     }
 
     void Update()
