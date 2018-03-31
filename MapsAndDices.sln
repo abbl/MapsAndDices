@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAndDices", "Assembly-CSharp.csproj", "{760FDCF9-24AB-E5DE-8E40-3D3BB1DF895D}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAndDices", "MapsAndDices.csproj", "{F8B02B27-6F33-0670-4414-3EE404CFBD5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{760FDCF9-24AB-E5DE-8E40-3D3BB1DF895D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{760FDCF9-24AB-E5DE-8E40-3D3BB1DF895D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{760FDCF9-24AB-E5DE-8E40-3D3BB1DF895D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{760FDCF9-24AB-E5DE-8E40-3D3BB1DF895D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8B02B27-6F33-0670-4414-3EE404CFBD5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B02B27-6F33-0670-4414-3EE404CFBD5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B02B27-6F33-0670-4414-3EE404CFBD5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B02B27-6F33-0670-4414-3EE404CFBD5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
