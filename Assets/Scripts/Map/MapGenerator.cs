@@ -12,6 +12,8 @@ public class MapGenerator : NetworkBehaviour {
     public int columnsNumber;
     
 	void Start () {
+        hexagonsArray = new ArrayList();
+
         if (isServer)
         {
             InitializeFields();
@@ -22,7 +24,6 @@ public class MapGenerator : NetworkBehaviour {
     [Server]
     private void InitializeFields()
     {
-        hexagonsArray = new ArrayList();
         hexagonSize = hexagons[0].GetComponent<Hexagon>().GetHexagonSize();
     }
 
@@ -63,5 +64,15 @@ public class MapGenerator : NetworkBehaviour {
         positionVector.x = (column * (hexagonSize.x * 0.75f));
         positionVector.y = ((row * hexagonSize.y) + offset);
         return positionVector;
+    }
+
+    public Hexagon GetHexagon(Vector2 fixedPosition)
+    {
+        foreach(Hexagon hexagon in hexagonsArray)
+        {
+            if (hexagon.IsFixedPositionEqual(fixedPosition))
+                return hexagon;
+        }
+        return null;
     }
 }

@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerChecker : NetworkBehaviour {
+    public float zOffsetFromMap;
     [SyncVar]
     public Color playerColor;
-    [SyncVar]
-    public Vector2 fixedPosition;
 
-    public override void OnStartAuthority()
+    void Start()
     {
-        base.OnStartAuthority();
-        Cmd_RandomPlayerColor();
+        if (isServer)
+        {
+            RandomPlayerColorOnServer();
+        }
     }
 
     [Command]
@@ -43,4 +44,8 @@ public class PlayerChecker : NetworkBehaviour {
         return GetComponent<SpriteRenderer>();
     }
 
+    public void UpdatePlayerPosition(Vector2 position)
+    {
+        transform.position = new Vector3(position.x, position.y, zOffsetFromMap);
+    }
 }

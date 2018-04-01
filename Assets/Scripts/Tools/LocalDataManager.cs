@@ -8,6 +8,16 @@ public class LocalDataManager
         return GameObject.FindGameObjectsWithTag("PlayerConnectionObject");
     }
 
+    public static GameObject GetPlayerGameObject(NetworkInstanceId netId)
+    {
+        foreach(GameObject gameObject in GetPlayersGameObjects())
+        {
+            if (IsNetIdEqual(gameObject, netId))
+                return gameObject;
+        }
+        return null;
+    }
+
     public static Player[] GetAllPlayers()
     {
         GameObject[] gameObjectsWithTag = GameObject.FindGameObjectsWithTag("PlayerConnectionObject");
@@ -30,8 +40,18 @@ public class LocalDataManager
         return null;
     }
 
-    public static bool isNetIdEqual(GameObject gameObject, NetworkInstanceId id)
+    public static bool IsNetIdEqual(GameObject gameObject, NetworkInstanceId id)
     {
         return gameObject.GetComponent<NetworkIdentity>().netId == id;
+    }
+
+    public static GameObject GetGameObjectByTagWithLocalAuthority(string tag)
+    {
+        foreach(GameObject gameObject in GameObject.FindGameObjectsWithTag(tag))
+        {
+            if (gameObject.GetComponent<NetworkIdentity>().hasAuthority)
+                return gameObject;
+        }
+        return null;
     }
 }

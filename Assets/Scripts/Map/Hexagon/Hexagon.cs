@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class Hexagon : NetworkBehaviour {
     [SyncVar]
-    private Vector2 fixedPositon = Vector2.zero;
+    private Vector2 fixedPositon;
     public Sprite hexagonCardSprite;
     public string hexagonName;
     public string hexagonDesc;
@@ -24,6 +24,16 @@ public class Hexagon : NetworkBehaviour {
     public Vector2 GetHexagonSize()
     {
         return GetSpriteRenderer().bounds.size;
+    }
+
+    public bool IsFixedPositionEqual(Vector2 otherPosition)
+    {
+        return fixedPositon == otherPosition;
+    }
+
+    public Vector2 GetPosition()
+    {
+        return transform.position;
     }
 
     private SpriteRenderer GetSpriteRenderer()

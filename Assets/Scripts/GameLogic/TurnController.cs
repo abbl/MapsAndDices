@@ -44,7 +44,7 @@ public class TurnController : NetworkBehaviour {
     [Server]
     public void SkipTurn(NetworkInstanceId playerNetId)
     {
-        if(LocalDataManager.isNetIdEqual(LocalDataManager.GetPlayersGameObjects()[playerTurnIndex], playerNetId))
+        if(LocalDataManager.IsNetIdEqual(LocalDataManager.GetPlayersGameObjects()[playerTurnIndex], playerNetId))
         {
             EndTurn();
         }
@@ -90,5 +90,10 @@ public class TurnController : NetworkBehaviour {
     public int GetPlayerIndex()
     {
         return playerTurnIndex;
+    }
+
+    public bool DoesThisNetIdMatchCurrentTurn(NetworkInstanceId playerNetId)
+    {
+        return LocalDataManager.IsNetIdEqual(LocalDataManager.GetPlayersGameObjects()[playerTurnIndex], playerNetId);
     }
 }

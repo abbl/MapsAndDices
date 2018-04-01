@@ -29,7 +29,10 @@ public class HexagonView : MonoBehaviour {
     /// </summary>
     private void IsHexagonLeftClicked()
     {
-        LocalDataManager.GetLocalPlayerGameObject().GetComponent<Player>().MakeMove(hexagon.GetFixedPosition());
+        if (Input.GetButtonDown("MouseLeftButton"))
+        {
+            LocalDataManager.GetLocalPlayerGameObject().GetComponent<Player>().MakeMove(hexagon.GetFixedPosition());
+        }
     }
 
     /// <summary>
