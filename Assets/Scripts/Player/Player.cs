@@ -45,12 +45,13 @@ public class Player : NetworkBehaviour {
     public void MakeMove(Vector2 fixedPosition)
     {
         if (isLocalPlayer)
-            Cmd_MakeMove(fixedPosition);
+            Cmd_MakeMove(fixedPosition, netId);
     }
 
     [Command]
-    private void Cmd_MakeMove(Vector2 fixedPosition)
+    private void Cmd_MakeMove(Vector2 fixedPosition, NetworkInstanceId localPlayerNetId)
     {
-        
+        GameObject.Find("MovementController").GetComponent<MovementController>().
+            ReceiveMoveRequest(fixedPosition, localPlayerNetId);   
     }
 }
