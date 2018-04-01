@@ -236,6 +236,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameLogic\AbstractClasses\TurnChangeListener.cs" />
     <Compile Include="Assets\Scripts\GameLogic\DiceController.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\MovementController.cs" />
     <Compile Include="Assets\Scripts\GameLogic\TurnController.cs" />
     <Compile Include="Assets\Scripts\GameLogic\TurnView.cs" />
     <Compile Include="Assets\Scripts\Map\Hexagon\Hexagon.cs" />

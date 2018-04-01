@@ -37,4 +37,5 @@ public class HexagonController : MonoBehaviour {
     {
         return hexagonCard != null;
     }
+
 }

@@ -4,14 +4,14 @@ using UnityEngine.Networking;
 
 public abstract class TurnChangeListener : NetworkBehaviour
 {
-    void Start()
+    public override void OnStartServer()
     {
         AddToRelayObject();
     }
 
-    private void AddToRelayObject()
+    protected void AddToRelayObject()
     {
-        GameObject.Find("TurnController").GetComponent<TurnController>().AddChangeListener(this);
+        TurnController.AddChangeListener(this);
     }
 
     abstract public void NextTurn();

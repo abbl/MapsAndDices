@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class HexagonView : MonoBehaviour {
     private HexagonController hexagonController;
+    private Hexagon hexagon;
 
 	// Use this for initialization
 	void Start () {
-        hexagonController = GetComponent<HexagonController>();	
+        hexagonController = GetComponent<HexagonController>();
+        hexagon = GetComponent<Hexagon>();
 	}
 	
 	// Update is called once per frame
@@ -27,7 +29,7 @@ public class HexagonView : MonoBehaviour {
     /// </summary>
     private void IsHexagonLeftClicked()
     {
-        // TO DO 
+        LocalDataManager.GetLocalPlayerGameObject().GetComponent<Player>().MakeMove(hexagon.GetFixedPosition());
     }
 
     /// <summary>

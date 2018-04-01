@@ -24,7 +24,6 @@ public class MapGenerator : NetworkBehaviour {
     {
         hexagonsArray = new ArrayList();
         hexagonSize = hexagons[0].GetComponent<Hexagon>().GetHexagonSize();
-        Debug.Log("HexagonSize:" + hexagonSize);
     }
 
     [Server]

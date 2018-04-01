@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 public class PlayerChecker : NetworkBehaviour {
     [SyncVar]
     public Color playerColor;
+    [SyncVar]
+    public Vector2 fixedPosition;
 
     public override void OnStartAuthority()
     {
@@ -40,4 +42,5 @@ public class PlayerChecker : NetworkBehaviour {
     {
         return GetComponent<SpriteRenderer>();
     }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class TurnController : NetworkBehaviour {
-    private ArrayList turnChangeListeners;
+    private static ArrayList turnChangeListeners = new ArrayList();
     private NetworkedTimer turnTimer;
     private int timerLastValue;
 
@@ -15,7 +15,6 @@ public class TurnController : NetworkBehaviour {
     
     void Start()
     {
-        turnChangeListeners = new ArrayList();
         turnTimer = GameObject.Find("TurnNetworkedTimer").GetComponent<NetworkedTimer>();
 
         if (isServer)
@@ -28,12 +27,12 @@ public class TurnController : NetworkBehaviour {
     {
         if (isServer)
         {
-            isTurnDone();
+            IsTurnDone();
         }
     }
 
     [Server]
-    private void isTurnDone()
+    private void IsTurnDone()
     {
         if(turnTimer != null)
             if (turnTimer.IsCountingDone())
@@ -76,14 +75,16 @@ public class TurnController : NetworkBehaviour {
         }
     }
 
-    public void AddChangeListener(TurnChangeListener listener)
+    public static void AddChangeListener(TurnChangeListener listener)
     {
         turnChangeListeners.Add(listener);
     }
 
     public int GetTurnTimerCount()
     {
-        return turnTimer.GetTimeLeft();
+        if(turnTimer != null)
+            return turnTimer.GetTimeLeft();
+        return -1;
     }
 
     public int GetPlayerIndex()

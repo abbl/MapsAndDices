@@ -25,7 +25,7 @@ public class Player : NetworkBehaviour {
         GameObject playerChecker = Instantiate(playerCheckerPrefab);
         NetworkServer.SpawnWithClientAuthority(playerChecker, connectionToClient);
     }
-
+    
     public void SkipTurn()
     {
         if (isLocalPlayer)
@@ -36,5 +36,21 @@ public class Player : NetworkBehaviour {
     private void Cmd_SkipTurn(NetworkInstanceId netId)
     {
         GameObject.Find("TurnController").GetComponent<TurnController>().SkipTurn(netId);
+    }
+    
+    /// <summary>
+    /// This method sends a request to server to move local player to certain hex.
+    /// </summary>
+    /// <param name="fixedPosition">Fixed position of hexagon</param>
+    public void MakeMove(Vector2 fixedPosition)
+    {
+        if (isLocalPlayer)
+            Cmd_MakeMove(fixedPosition);
+    }
+
+    [Command]
+    private void Cmd_MakeMove(Vector2 fixedPosition)
+    {
+        
     }
 }
