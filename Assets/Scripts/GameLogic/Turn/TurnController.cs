@@ -64,6 +64,7 @@ public class TurnController : NetworkBehaviour {
             playerTurnIndex = 0;
         }
         turnTimer.StartTimer(turnTime);
+        Debug.Log("Tura");
         NotifyListenersAboutNextTurn();
     }
 
