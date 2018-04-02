@@ -12,7 +12,6 @@ public class TurnController : NetworkBehaviour {
     [SyncVar]
     public int playerTurnIndex = -1;
 
-    
     void Start()
     {
         turnTimer = GameObject.Find("TurnNetworkedTimer").GetComponent<NetworkedTimer>();
@@ -64,7 +63,6 @@ public class TurnController : NetworkBehaviour {
             playerTurnIndex = 0;
         }
         turnTimer.StartTimer(turnTime);
-        Debug.Log("Tura");
         NotifyListenersAboutNextTurn();
     }
 

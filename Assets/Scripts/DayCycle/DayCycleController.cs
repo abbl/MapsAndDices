@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class DayCycleController : TurnChangeListener {
-    [SyncVar]
-    private int cycleIndex;
     private bool changeLightIntensity;
+    [SyncVar]
+    public int cycleIndex;
     public GameObject[] cycles;
     public Light worldLight;
     public float lightChangeSpeed;
 
     void Start () {
-        cycleIndex = -1;
         changeLightIntensity = true;
 	}
 
@@ -21,7 +20,7 @@ public class DayCycleController : TurnChangeListener {
     {
         IncrementCycleIndex();
         Rpc_NextCycle();
-        Debug.Log("Buja");
+        Debug.Log("Received turn");
     }
 
     [Server]
@@ -47,7 +46,6 @@ public class DayCycleController : TurnChangeListener {
 
         if (cycleBeginClip != null)
         {
-            Debug.Log("Sru");
             GetComponent<AudioSource>().clip = cycleBeginClip;
             GetComponent<AudioSource>().Play();
         }
