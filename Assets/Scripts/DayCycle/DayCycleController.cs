@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent (typeof(DayCycleView))]
 public class DayCycleController : TurnChangeListener {
     private bool changeLightIntensity;
+    [SyncVar]
+    public int cycleLengthIndex;
     [SyncVar]
     public int cycleIndex;
     public GameObject[] cycles;
@@ -26,9 +29,14 @@ public class DayCycleController : TurnChangeListener {
     [Server]
     private void IncrementCycleIndex()
     {
-        if(++cycleIndex > cycles.Length - 1)
+        if(++cycleLengthIndex == LocalDataManager.GetPlayersGameObjects().Length)
         {
-            cycleIndex = 0;
+            cycleLengthIndex = 0;
+
+            if (++cycleIndex > cycles.Length - 1)
+            {
+                cycleIndex = 0;
+            }
         }
     }
 
@@ -38,6 +46,8 @@ public class DayCycleController : TurnChangeListener {
         GameObject cycle = cycles[cycleIndex];
         changeLightIntensity = true;
         PlayCycleSound(cycle);
+        if (cycleIndex == 0)
+            DisplayNewDayPopOut();
     }
 
     private void PlayCycleSound(GameObject cycle)
@@ -49,6 +59,11 @@ public class DayCycleController : TurnChangeListener {
             GetComponent<AudioSource>().clip = cycleBeginClip;
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    private void DisplayNewDayPopOut()
+    {
+        GetComponent<DayCycleView>().DisplayNewDayPopOut();
     }
 
     void Update () {
