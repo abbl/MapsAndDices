@@ -7,6 +7,7 @@ using System.Collections;
 public class NetworkManagerGUI : MonoBehaviour
 {
     private NetworkManager networkManager;
+    public Canvas networkManagerCanvas;
 
     private void Awake()
     {
