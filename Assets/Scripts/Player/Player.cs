@@ -24,6 +24,7 @@ public class Player : NetworkBehaviour {
         NetworkServer.SpawnWithClientAuthority(playerChecker, connectionToClient);
         Target_SendCheckerReferenceToPlayer(connectionToClient, playerChecker);
         movementController.MovePlayerOnSpawn(RandomPlayerPosition(), netId, connectionToClient);
+        Target_FocusCameraOnChecker(connectionToClient);
     }
 
     [TargetRpc]
@@ -33,6 +34,12 @@ public class Player : NetworkBehaviour {
         {
             playerChecker = playerCheckerOnServer;
         }
+    }
+
+    [TargetRpc]
+    private void Target_FocusCameraOnChecker(NetworkConnection networkConnection)
+    {
+        CameraTools.FocusCameraOnGameObject(Camera.main, playerChecker);
     }
 
     [Server]
