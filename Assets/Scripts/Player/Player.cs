@@ -95,4 +95,9 @@ public class Player : NetworkBehaviour {
     {
         playerChecker.GetComponent<PlayerChecker>().UpdatePlayerPosition(position);
     }
+
+    public GameObject GetPlayerChecker()
+    {
+        return playerChecker;
+    }
 }

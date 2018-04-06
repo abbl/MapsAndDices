@@ -8,6 +8,11 @@ public class LocalDataManager
         return GameObject.FindGameObjectsWithTag("PlayerConnectionObject");
     }
 
+    public static GameObject[] GetPlayersCheckers()
+    {
+        return GameObject.FindGameObjectsWithTag("PlayerChecker");
+    }
+
     public static GameObject GetPlayerGameObject(NetworkInstanceId netId)
     {
         foreach(GameObject gameObject in GetPlayersGameObjects())

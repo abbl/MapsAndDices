@@ -8,11 +8,11 @@ public class DayCycleView : MonoBehaviour
     private GameObject newDayPopOut;
     public GameObject newDayPopOutPrefab;
 
-    private void Start()
+    private void Awake()
     {
         inGameCanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
     }
-
+    
     public void DisplayNewDayPopOut()
     {
         newDayPopOut = Instantiate(newDayPopOutPrefab, inGameCanvas.transform);
