@@ -31,7 +31,7 @@ public class DayCycleController : TurnChangeListener {
             {
                 cycleIndex = 0;
             }
-            else //This has to like this, it could look like 'if' above but hook on this SyncVar will throw an error.
+            else
             {
                 ++cycleIndex;
             }

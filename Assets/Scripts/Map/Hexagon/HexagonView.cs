@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(HexagonController))]
 public class HexagonView : MonoBehaviour {
     private HexagonController hexagonController;
     private Hexagon hexagon;

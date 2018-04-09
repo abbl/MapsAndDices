@@ -43,8 +43,7 @@ public class MapGenerator : NetworkBehaviour {
     [Server]
     private Hexagon CreateHexagon(int row, int column, int hexagonIndex)
     {
-        GameObject hexagonObject = Instantiate(hexagonsDatabase.transform.GetChild(hexagonIndex).gameObject, CalculateHexagonPosition(row, column), Quaternion.identity) as GameObject;
-        hexagonObject.transform.parent = gameObject.transform;
+        GameObject hexagonObject = Instantiate(hexagonsDatabase.transform.GetChild(hexagonIndex).gameObject, CalculateHexagonPosition(row, column), Quaternion.identity, gameObject.transform) as GameObject;
         NetworkServer.Spawn(hexagonObject);
         Hexagon hexagon = hexagonObject.GetComponent<Hexagon>();
         hexagon.SetFixedPosition(new Vector2(column, row));

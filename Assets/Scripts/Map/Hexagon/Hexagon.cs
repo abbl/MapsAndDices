@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent(typeof(HexagonController))]
 public class Hexagon : NetworkBehaviour {
     [SyncVar]
     private Vector2 fixedPositon;
@@ -13,7 +14,7 @@ public class Hexagon : NetworkBehaviour {
     [Server]
     public void SetFixedPosition(Vector2 position)
     {
-        this.fixedPositon = position;
+        fixedPositon = position;
     }
 
     public Vector2 GetFixedPosition()

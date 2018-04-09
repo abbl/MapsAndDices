@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+[RequireComponent(typeof(Hexagon))]
 public class HexagonController : MonoBehaviour {
     private static GameObject hexagonCard;
     private Hexagon hexagon;
