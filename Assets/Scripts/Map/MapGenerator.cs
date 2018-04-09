@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class MapGenerator : NetworkBehaviour {
     private Vector2 hexagonSize;
     private ArrayList hexagonsArray;
-    public GameObject[] hexagons;
+    public GameObject hexagonsDatabase;
     public float hexagonOffset;
     public int rowsNumber;
     public int columnsNumber;
@@ -24,7 +24,7 @@ public class MapGenerator : NetworkBehaviour {
     [Server]
     private void InitializeFields()
     {
-        hexagonSize = hexagons[0].GetComponent<Hexagon>().GetHexagonSize();
+        hexagonSize = hexagonsDatabase.GetComponentInChildren<Hexagon>().GetHexagonSize();
     }
 
     [Server]
@@ -34,7 +34,7 @@ public class MapGenerator : NetworkBehaviour {
         {
             for (int column = 1; column < columnsNumber + 1; column++) //x
             {
-                int hexagonIndex = Random.Range(0, hexagons.Length);
+                int hexagonIndex = Random.Range(0, hexagonsDatabase.GetComponentsInChildren<Hexagon>().Length);
                 hexagonsArray.Add(CreateHexagon(row, column, hexagonIndex));
             }
         }
@@ -43,7 +43,7 @@ public class MapGenerator : NetworkBehaviour {
     [Server]
     private Hexagon CreateHexagon(int row, int column, int hexagonIndex)
     {
-        GameObject hexagonObject = Instantiate(hexagons[hexagonIndex], CalculateHexagonPosition(row, column), Quaternion.identity) as GameObject;
+        GameObject hexagonObject = Instantiate(hexagonsDatabase.transform.GetChild(hexagonIndex).gameObject, CalculateHexagonPosition(row, column), Quaternion.identity) as GameObject;
         hexagonObject.transform.parent = gameObject.transform;
         NetworkServer.Spawn(hexagonObject);
         Hexagon hexagon = hexagonObject.GetComponent<Hexagon>();
